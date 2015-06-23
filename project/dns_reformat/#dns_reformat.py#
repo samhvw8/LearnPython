@@ -1,0 +1,40 @@
+import sys
+DNS_ZONE_FILE = sys.argv[1]
+
+
+def getdetail(line):
+    detail = line.split()
+    return detail
+
+
+def main():
+    # Check Argv
+    if(len(sys.argv) != 2):
+        exit("python {} <DNS-ZONE-FILE>".format(argv[0]))
+
+    f = open(DNS_ZONE_FILE,"r")
+
+    type_dict = dict()
+    data_dict = dict()
+
+    for line in f:
+        if line[0] == ';':
+            continue
+        if line[0] == '\n':
+            continue
+        if line[0] != ' ':
+            detail_line = getdetail(line)
+            if detail_line[-1] == '(':
+                for sub_line in f:
+                    line += sub_line
+                    if ')' in line:
+                        break
+                detail_line = getdetail(line)
+            print detail_line
+        
+
+
+if __name__ == '__main__':
+    main()
+
+
