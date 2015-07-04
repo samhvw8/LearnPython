@@ -1,0 +1,21 @@
+# https://www.hackerrank.com/challenges/two-arrays
+def check_array(a, b, _sum):
+
+    flag = 1
+    for i in xrange(len(a)):
+        if _sum - a[i] not in b:
+            print "NO"
+            flag = 0
+            break
+        else:
+            b.remove(_sum - a[i])
+    if flag:
+        print "YES"
+
+
+CASE = input()
+for case_i in xrange(CASE):
+    detail = map(int, raw_input().split())
+    _a = map(int, raw_input().split())
+    _b = map(int, raw_input().split())
+    check_array(_a, _b, detail[1])
